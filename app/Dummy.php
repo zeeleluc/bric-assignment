@@ -2,7 +2,11 @@
 
 namespace App;
 
+use App\Events\DummyUpdatedEvent;
 use App\Interfaces\ModelInterface;
+use App\Notifications\DummyUpdated;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Notification;
 
 /**
  * App\Dummy
@@ -29,6 +33,8 @@ use App\Interfaces\ModelInterface;
 class Dummy extends BaseModel implements ModelInterface
 {
 
+    use Notifiable;
+
     /**
      * The table associated with the model.
      *
@@ -43,6 +49,21 @@ class Dummy extends BaseModel implements ModelInterface
         'lorem',
         'ipsum',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            /** @var self $model */
+            $model->generateToken();
+        });
+
+        static::updated(function ($model) {
+            /** @var self $model */
+            event(new DummyUpdatedEvent($model));
+        });
+    }
 
     /**
      * @param array $values
