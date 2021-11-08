@@ -20,9 +20,6 @@ class CreateDummiesTable extends Migration
                 ->nullable();
             $table->string('ipsum', 100)
                 ->nullable();
-            $table->integer('mail_count')
-                ->nullable()
-                ->default(0);
             $table->timestamps();
         });
     }

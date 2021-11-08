@@ -29,6 +29,8 @@ use Illuminate\Support\Facades\Notification;
  * @method static \Illuminate\Database\Eloquent\Builder|Dummy whereToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Dummy whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read int|null $notifications_count
  */
 class Dummy extends BaseModel implements ModelInterface
 {
